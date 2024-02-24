@@ -26,7 +26,8 @@ export default function CardTarefa(props: CarTarefaProps) {
     setDragStatus(false);
     console.log(`Soltei!: ${id} na coluna: ${coluna}`)
     let form = document.getElementById('form-tarefa') as HTMLFormElement;
-    form.requestSubmit();
+    // form.requestSubmit();
+    form.submit()
   }
 
   return (
@@ -38,6 +39,7 @@ export default function CardTarefa(props: CarTarefaProps) {
         draggable={true}
         onDragCapture={() => setDragStatus(true)}
         onDragEnd={(event) => {
+          event.preventDefault();
           let div = document.elementsFromPoint(event.clientX, event.clientY);
           let concluido = div.find((elemento) => elemento.id === "concluido");
           let parado = div.find((elemento) => elemento.id === "parado");

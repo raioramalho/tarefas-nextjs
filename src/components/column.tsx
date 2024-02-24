@@ -1,8 +1,9 @@
 import { Tarefa } from "@/types/tarefa.entity";
 import { Badge } from "./ui/badge";
 import CardTarefa from "./card-tarefa";
-import { randomUUID } from "crypto";
 import { revalidateTag } from "next/cache";
+
+
 
 export default function Column(props: any) {
 
@@ -10,7 +11,8 @@ export default function Column(props: any) {
     (tarefa: Tarefa) => tarefa.progresso === props.column
   );
 
-  const handleUpdateTaks: any = () => {
+  const handleUpdateTaks: any = async () => {
+    'use server'
     console.log('Executei: handleUpdateTask')
     revalidateTag('get-tarefas');
   }
@@ -30,7 +32,7 @@ export default function Column(props: any) {
           // method="PUT"
         >
         {tarefas.map((tarefa: Tarefa) => (
-          <CardTarefa key={randomUUID().toString()} tarefa={tarefa}/>
+          <CardTarefa key={tarefa.codsprinttar} tarefa={tarefa}/>
         ))}
         </form>
       </div>
