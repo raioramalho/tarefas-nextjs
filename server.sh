@@ -1,0 +1,1 @@
+npx json-server server.json -w -p 3001

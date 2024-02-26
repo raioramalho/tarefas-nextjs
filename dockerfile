@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -7,10 +7,9 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY server.sh server.json package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-    # npm install
-
+    npm install -g npm@latest && npm install
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -28,7 +27,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # RUN yarn build
 
 # If using npm comment out above and use below instead
-RUN npm run build
+RUN npm run api && npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
