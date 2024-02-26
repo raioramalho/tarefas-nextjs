@@ -8,7 +8,7 @@ export default class ApiTarefa {
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const request = await fetch("http://localhost:3001/tarefas", {
+    const request = await fetch("http://192.168.2.201:3001/tarefas", {
       next: {
         tags: ['get-tarefas']
       }
@@ -20,7 +20,7 @@ export default class ApiTarefa {
   public async postTarefa(tarefa: Tarefa): Promise<Tarefa> {
     console.log(`${ApiTarefa.name}: executou - ${this.postTarefa.name}`);
 
-    const request = await fetch("http://localhost:3001/tarefas", {
+    const request = await fetch("http://192.168.2.201:3001/tarefas", {
       method: "POST",
       body: JSON.stringify(tarefa),
     });
@@ -32,7 +32,7 @@ export default class ApiTarefa {
   public async putTarefa(tarefa: Tarefa): Promise<Tarefa> {
     console.log(`${ApiTarefa.name}: executou - ${this.putTarefa.name}`);
 
-    const request = await fetch(`http://localhost:3001/tarefas/${tarefa.codprojtar}`, {
+    const request = await fetch(`http://192.168.2.201:3001/tarefas/${tarefa.codprojtar}`, {
       method: "PUT",
       body: JSON.stringify(tarefa),
     });

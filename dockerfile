@@ -7,7 +7,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /
 
 # Install dependencies based on the preferred package manager
-COPY server.sh server.json package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY server.json package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
     npm install -g npm@latest && npm install
 
@@ -27,7 +27,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # RUN yarn build
 
 # If using npm comment out above and use below instead
-RUN npm run api && npm run build
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner

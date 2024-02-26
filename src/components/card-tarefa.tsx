@@ -35,7 +35,6 @@ export default function CardTarefa(props: CarTarefaProps) {
     
       <Separator className={`${dragStatus ? "opacity-100 bg-purple-800" : "opacity-0"} hover:opacity-100`} />
       <div
-       className={``}
         id="tarefa-div"
         draggable={true}
         onDragCapture={() => setDragStatus(true)}

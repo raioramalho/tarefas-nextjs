@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "api": "pm2 start 'server.sh' --name api",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
