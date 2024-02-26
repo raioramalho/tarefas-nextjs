@@ -1,52 +1,23 @@
-# Estágio 1: Preparar ambiente e instalar dependências
-FROM node:20-alpine AS base
+# Use a imagem oficial do Node.js como base
+FROM node:alpine
 
-# Install dependencies only when needed
-FROM base AS deps
-
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-
-# Definir diretório de trabalho
+# Defina o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json package-lock.json* ./
-RUN npm install --production
-
-# Estágio 2: Construir aplicativo
-FROM base AS builder
-
-# Definir diretório de trabalho
-WORKDIR /app
-
-# Copiar código do projeto
+# Copie o código fonte do projeto para o contêiner
 COPY . .
 
-# Construir aplicativo
-RUN npm install && npm run build
+# Instale as dependências do projeto
+RUN npm install
 
-# Estágio 3: Executar aplicativo em produção
-FROM base AS runner
+# Compile o projeto Next.js
+RUN npm run build
 
-# Definir diretório de trabalho
-WORKDIR /app
-
-# Definir ambiente de produção
-ENV NODE_ENV production
-
-# Copiar arquivos de construção do estágio de construção
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-
-# Definir permissões para diretório .next
-RUN chown -R node:node ./.next
-
-# Expor porta
+# Exponha a porta em que o servidor Next.js irá ouvir
 EXPOSE 3000
 
-# Configurar hostname
-ENV HOSTNAME "0.0.0.0"
+ENV HOST="0.0.0.0"
+ENV PORT=3000
 
-# server.js é criado por next build a partir da saída independente
-CMD ["node", "server.js"]
+# Comando para iniciar o servidor Next.js
+CMD ["npm", "start"]
