@@ -9,14 +9,14 @@ WORKDIR /
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-    npm install
+    # npm install
 
 
 # Rebuild the source code only when needed
-# FROM base AS builder
-# WORKDIR /
-# COPY --from=deps /node_modules ./node_modules
-# COPY . .
+FROM base AS builder
+WORKDIR /
+COPY --from=deps /node_modules ./node_modules
+COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
