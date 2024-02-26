@@ -9,7 +9,7 @@ export default class ApiProduct {
 
     const request = await fetch("http://localhost:3001/produtos", {
       next: {
-        products: ['get-products']
+        tags: ['get-products']
       }
     });
     const response = await request.json();

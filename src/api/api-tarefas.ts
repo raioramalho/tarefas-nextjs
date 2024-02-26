@@ -10,7 +10,7 @@ export default class ApiTarefa {
 
     const request = await fetch("http://localhost:3001/tarefas", {
       next: {
-        tarefas: ['get-tarefas']
+        tags: ['get-tarefas']
       }
     });
     const response = await request.json();

@@ -25,9 +25,9 @@ export default function CardTarefa(props: CarTarefaProps) {
     }
     setDragStatus(false);
     console.log(`Soltei!: ${id} na coluna: ${coluna}`)
-    let form = document.getElementById('form-tarefa') as HTMLFormElement;
+    // let form = document.getElementById('form-tarefa') as HTMLFormElement;
     // form.requestSubmit();
-    form.submit()
+    // form.submit()
   }
 
   return (

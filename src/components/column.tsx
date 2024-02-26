@@ -1,21 +1,12 @@
 import { Tarefa } from "@/types/tarefa.entity";
 import { Badge } from "./ui/badge";
 import CardTarefa from "./card-tarefa";
-import { revalidateTag } from "next/cache";
-
-
 
 export default function Column(props: any) {
 
   const tarefas: Tarefa[] = props.cards.filter(
     (tarefa: Tarefa) => tarefa.progresso === props.column
   );
-
-  const handleUpdateTaks: any = async () => {
-    'use server'
-    console.log('Executei: handleUpdateTask')
-    revalidateTag('get-tarefas');
-  }
 
   return (
     <div id={props.column} className="w-56 shrink-0 border py-2 rounded">
@@ -25,16 +16,11 @@ export default function Column(props: any) {
         <Badge>{tarefas.length}</Badge>
       </div>
       <div className={`h-full w-full rounded p-2 transition-colors`}>
-        <form 
-        id="form-tarefa"
-        onSubmit={handleUpdateTaks()}
-          // action={handleUpdateTaks}
-          // method="PUT"
-        >
+        
         {tarefas.map((tarefa: Tarefa) => (
           <CardTarefa key={tarefa.codsprinttar} tarefa={tarefa}/>
         ))}
-        </form>
+        
       </div>
     </div>
   );

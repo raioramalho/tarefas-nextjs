@@ -1,7 +1,6 @@
+'use server'
 import Column from "./column";
 import ApiTarefa from "../api/api-tarefas";
-import { Suspense } from "react";
-import Spinner from "./ui/spinner";
 
 export default async function Board() {
   const api = new ApiTarefa();
