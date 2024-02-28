@@ -14,10 +14,10 @@ RUN npm install
 RUN npm run build
 
 # Exponha a porta em que o servidor Next.js irá ouvir
-EXPOSE 3000
+EXPOSE 80
 
 ENV HOST="0.0.0.0"
-ENV PORT=3000
+ENV PORT=80
 
 # Comando para iniciar o servidor Next.js
 CMD ["npm", "start"]
